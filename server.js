@@ -4,10 +4,13 @@ const http = require('http');
 const path = require('path');
 const { Server } = require('socket.io');
 const ACTIONS = require('./src/Actions');
+const cors=require('cors');
 
 const server = http.createServer(app);
 const io = new Server(server);
 
+
+app.use(cors({origin: '*'}));
 
 app.use(express.static('build'));
 app.use((req, res, next) => {
@@ -15,7 +18,9 @@ app.use((req, res, next) => {
 });
 
 const userSocketMap = {};
+
 function getAllConnectedClients(roomId) {
+    // Mapping
     return Array.from(io.sockets.adapter.rooms.get(roomId) || []).map(
         (socketId) => {
             return {
