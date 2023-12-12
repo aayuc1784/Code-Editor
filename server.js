@@ -1,4 +1,4 @@
-const express = require('express');
+const express=require('express');
 const app = express();
 const http = require('http');
 const path = require('path');
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 
 const userSocketMap = {};
 
-function getAllConnectedClients(roomId) {
+function getAllConnectedClients(roomId){
     // Mapping
     return Array.from(io.sockets.adapter.rooms.get(roomId) || []).map(
         (socketId) => {
